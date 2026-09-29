@@ -18,8 +18,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'CivicPulse — See a problem. Speak up. Get it moving.',
-  description: 'Human-centered civic problem aggregation platform that converts individual complaints into collective civic signal for community priority and escalation.',
+  title: 'NagarSetu — See a problem. Speak up. Get it moving.',
+  description: 'NagarSetu is a human-centered civic problem aggregation platform that converts individual complaints into collective civic signal for community priority and escalation.',
 };
 
 export default function RootLayout({

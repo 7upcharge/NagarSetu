@@ -43,7 +43,7 @@ export const Navbar: React.FC = () => {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-lg tracking-tight text-stone-50">CivicPulse</span>
+              <span className="font-semibold text-lg tracking-tight text-stone-50">NagarSetu</span>
               <span className="px-2 py-0.5 text-[10px] uppercase font-bold tracking-wider bg-amber-900/60 text-amber-300 border border-amber-700/50 rounded">
                 Phase 1 Signal Engine
               </span>

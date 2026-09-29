@@ -34,7 +34,7 @@ export default function HomePage() {
           </h1>
 
           <p className="text-base sm:text-lg text-stone-600 leading-relaxed">
-            CivicPulse brings individual reports together so communities can see which problems affect the most people and where action is needed.
+            NagarSetu brings individual reports together so communities can see which problems affect the most people and where action is needed.
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">

@@ -36,8 +36,8 @@ interface CivicContextType {
 
 const CivicContext = createContext<CivicContextType | undefined>(undefined);
 
-const LOCAL_STORAGE_KEY = 'civicpulse_issues_v1';
-const USER_ACTIVITY_KEY = 'civicpulse_user_activity_v1';
+const LOCAL_STORAGE_KEY = 'nagarsetu_issues_v1';
+const USER_ACTIVITY_KEY = 'nagarsetu_user_activity_v1';
 
 export const CivicProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [issues, setIssues] = useState<CivicIssue[]>(INITIAL_ISSUES);

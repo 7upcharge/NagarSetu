@@ -14,10 +14,10 @@ export const Footer: React.FC = () => {
               <div className="w-7 h-7 rounded bg-amber-600 flex items-center justify-center text-stone-950 font-bold">
                 <Signal className="w-4 h-4 text-white" />
               </div>
-              <span className="font-semibold text-stone-200 text-base">CivicPulse</span>
+              <span className="font-semibold text-stone-200 text-base">NagarSetu</span>
             </div>
             <p className="text-xs leading-relaxed text-stone-400 max-w-md">
-              One report starts a signal. A community makes it visible. CivicPulse is a human-centered civic problem reporting platform that turns isolated citizen complaints into actionable collective signals for local administration.
+              One report starts a signal. A community makes it visible. NagarSetu is a human-centered civic problem reporting platform that turns isolated citizen complaints into actionable collective signals for local administration.
             </p>
             <div className="flex items-center gap-4 text-xs text-stone-400 pt-1">
               <span className="flex items-center gap-1">
@@ -53,7 +53,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="pt-6 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 gap-4">
-          <p>© {new Date().getFullYear()} CivicPulse. Phase 1 Civic Technology Prototype. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} NagarSetu. Phase 1 Civic Technology Prototype. All rights reserved.</p>
           <p className="font-mono text-[11px] text-stone-500">
             Phase 1 Frontend Architecture • Mock Agent Orchestrator Connected
           </p>

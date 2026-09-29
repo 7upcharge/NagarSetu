@@ -1,9 +1,9 @@
-# CivicPulse — Phase 1 Civic Technology Platform
+# NagarSetu — Phase 1 Civic Technology Platform
 
 > *"See a problem. Speak up. Get it moving."*
 > *"One report starts a signal. A community makes it visible."*
 
-CivicPulse is a human-centered civic problem reporting platform designed to convert individual citizen complaints into high-priority collective signals for local administration and municipal authorities.
+NagarSetu is a human-centered civic problem reporting platform designed to convert individual citizen complaints into high-priority collective signals for local administration and municipal authorities.
 
 ---
 
@@ -11,14 +11,14 @@ CivicPulse is a human-centered civic problem reporting platform designed to conv
 
 Traditional civic reporting platforms suffer from **fragmentation and silence**: multiple citizens experience the same overflowing garbage container or hazardous road crater, but each files an isolated, uncoordinated ticket. 
 
-**CivicPulse changes this paradigm:**
-When a citizen attempts to report a problem, CivicPulse inspects nearby community reports. Instead of creating redundant tickets, citizens can join existing issues ("I'm affected too"). The system aggregates community reports and affected population into a unified civic signal, dynamically raising urgency and routing issues through escalating administrative tiers.
+**NagarSetu changes this paradigm:**
+When a citizen attempts to report a problem, NagarSetu inspects nearby community reports. Instead of creating redundant tickets, citizens can join existing issues ("I'm affected too"). The system aggregates community reports and affected population into a unified civic signal, dynamically raising urgency and routing issues through escalating administrative tiers.
 
 ---
 
 ## 2. The Civic Feedback Loop
 
-CivicPulse is designed around a continuous 10-step feedback loop:
+NagarSetu is designed around a continuous 10-step feedback loop:
 
 ```
 REPORT
@@ -50,7 +50,7 @@ Every user action (filing a report, confirming affected status, adjusting severi
 
 ## 3. Graph Model (Civic Ecosystem Graph)
 
-Internally, CivicPulse models the civic ecosystem as a relationship graph:
+Internally, NagarSetu models the civic ecosystem as a relationship graph:
 
 ### Nodes:
 - **Person**: Citizens, commuters, faculty, local residents.

@@ -53,7 +53,7 @@ export const CivicLoopVisualizer: React.FC = () => {
           How a report moves
         </h2>
         <p className="text-sm text-stone-600 leading-relaxed">
-          CivicPulse isn't a static complaint inbox. It is a living feedback loop that amplifies individual reports into visible civic urgency.
+          NagarSetu isn't a static complaint inbox. It is a living feedback loop that amplifies individual reports into visible civic urgency.
         </p>
       </div>
 
