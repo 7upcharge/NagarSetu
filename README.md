@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CivicPulse — Phase 1 Civic Technology Platform
 
-## Getting Started
+> *"See a problem. Speak up. Get it moving."*
+> *"One report starts a signal. A community makes it visible."*
 
-First, run the development server:
+CivicPulse is a human-centered civic problem reporting platform designed to convert individual citizen complaints into high-priority collective signals for local administration and municipal authorities.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 1. Product Concept
+
+Traditional civic reporting platforms suffer from **fragmentation and silence**: multiple citizens experience the same overflowing garbage container or hazardous road crater, but each files an isolated, uncoordinated ticket. 
+
+**CivicPulse changes this paradigm:**
+When a citizen attempts to report a problem, CivicPulse inspects nearby community reports. Instead of creating redundant tickets, citizens can join existing issues ("I'm affected too"). The system aggregates community reports and affected population into a unified civic signal, dynamically raising urgency and routing issues through escalating administrative tiers.
+
+---
+
+## 2. The Civic Feedback Loop
+
+CivicPulse is designed around a continuous 10-step feedback loop:
+
+```
+REPORT
+  ↓
+UNDERSTAND
+  ↓
+MATCH
+  ↓
+AGGREGATE
+  ↓
+MEASURE IMPACT
+  ↓
+PRIORITIZE
+  ↓
+ESCALATE
+  ↓
+TRACK RESPONSE
+  ↓
+RESOLVE
+  ↓
+VERIFY
+  ↓
+FEED RESULT BACK INTO SYSTEM
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Every user action (filing a report, confirming affected status, adjusting severity) triggers this feedback loop, updating community signal counts, recalculating priority scores, and advancing escalation stages.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 3. Graph Model (Civic Ecosystem Graph)
 
-## Learn More
+Internally, CivicPulse models the civic ecosystem as a relationship graph:
 
-To learn more about Next.js, take a look at the following resources:
+### Nodes:
+- **Person**: Citizens, commuters, faculty, local residents.
+- **Problem**: Categorized civic issues (Garbage, Roads, Water, Streetlights, Drainage, Safety, Public Property).
+- **Location**: Neighborhood landmarks, GPS coordinates, public grids.
+- **Evidence**: Photos, timestamps, severity scale.
+- **Community**: Aggregate affected residents & commuters.
+- **Authority**: College Administration, Municipal Corporation.
+- **Status**: Lifecycle status (`reported` → `confirmed` → `escalated` → `acknowledged` → `action_started` → `resolved` → `community_verified`).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Relationships (Triples):
+- `Person` ──(reported)──► `Problem`
+- `Person` ──(affected_by)──► `Problem`
+- `Person` ──(supports)──► `Problem`
+- `Problem` ──(located_at)──► `Location`
+- `Problem` ──(similar_to)──► `Problem`
+- `Problem` ──(affects)──► `Community`
+- `Problem` ──(escalated_to)──► `Authority`
+- `Authority` ──(responsible_for)──► `Problem`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+*(Note: The graph model drives UI relationship visualizations under "Community connections" without overwhelming citizens with technical database terminology).*
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 4. Multi-Agent Architecture (`/src/agents`)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Phase 1 establishes the agent orchestration layer in TypeScript modules ready to connect to a future multi-agent backend:
+
+1. **`ReportAgent.ts`**: Takes raw citizen input (title, description, category, location, photo), normalizes data structure, extracts keywords, and assigns initial severity.
+2. **`MatchAgent.ts`**: Runs mock semantic matching based on category, keyword token similarity, and location context to detect existing duplicate complaints.
+3. **`ImpactAgent.ts`**: Aggregates community report counts, affected population estimates, and affected location radius.
+4. **`PriorityAgent.ts`**: Calculates priority score (0–100) using the formula:
+   $$\text{Priority} = (35\% \times \text{Reports}) + (40\% \times \text{Affected}) + (20\% \times \text{Severity}) + (5\% \times \text{Time Unresolved})$$
+5. **`EscalationAgent.ts`**: Evaluates whether priority score or community scale crosses administrative thresholds (Community → College Administration → Municipal Corporation).
+6. **`ResolutionAgent.ts`**: Tracks lifecycle state transitions and updates progress percentage.
+7. **`Orchestrator.ts`**: Pipeline coordinator executing the end-to-end agent flow.
+
+---
+
+## 5. Current Phase 1 Limitations
+
+- **No Live Backend/DB**: Phase 1 operates purely in the browser using React Context with `localStorage` persistence.
+- **Mock Agents**: Agents are deterministic TypeScript functions without LLM dependency.
+- **Simulated Escalation**: Municipal dispatches are simulated within the UI prototype ("Ready for municipal escalation / Demo status").
+
+---
+
+## 6. Future Backend Architecture (Phase 2+)
+
+- **Agents**: FastGraph / LangGraph microservices with LLM semantic matching (embeddings + vector search).
+- **Database**: Graph Database (Neo4j / Memgraph) paired with PostgreSQL for persistence.
+- **Integrations**: Official municipal API connectors, WhatsApp civic bots, email notifications, government ticketing webhooks.
+
+---
+
+## 7. Demo Flow Walkthrough
+
+1. **HOME DASHBOARD (`/`)**:
+   - View Hero and "What's happening around us" aggregate stats.
+   - Inspect top **Community Priority** items (#1 Overflowing garbage near Main Gate, P:92).
+   - Review **"How a report moves"** civic loop process.
+2. **DUPLICATE PROBLEM FLOW (`/report`)**:
+   - Click **"Report a Problem"**.
+   - Type `"Garbage near Main Gate"`.
+   - The **Match Agent** triggers automatically: *"We found a similar problem nearby!"*
+   - Click **`[I'm affected too]`**.
+   - The system connects you to existing Issue #1 without creating a duplicate.
+3. **LIVE LOOP RE-PRIORITIZATION**:
+   - Return to Dashboard (`/`).
+   - Observe Community Reports increased from 87 → 88, Affected count increased from 1,284 → 1,285.
+   - Priority score recalculates dynamically.
+4. **DEMO SIMULATION CONTROLS**:
+   - Open the **Demo Controls** drawer (bottom left).
+   - Click **"+100 Affected"** or **"Escalate Issue"**.
+   - Watch the priority score rise, escalation level change, and ranking update in real time.
+
+---
+
+## Tech Stack
+
+- Next.js 15 (App Router)
+- TypeScript
+- Tailwind CSS
+- React Context State & LocalStorage
+- Lucide Icons
